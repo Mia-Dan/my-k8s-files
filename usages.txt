@@ -1,0 +1,24 @@
+Usage Examples:
+
+---
+
+AUTO-SCALER
+
+1. enable autoscaler for ...
+kubectl autoscale deployment <name> --min=1 --max=8 --cpu-percent=10
+
+2. get info (e.g, resource utilization)
+# k get horizontalpodautoscalers.autoscaling
+k get hpa # shorthand for horizontalpodautoscalers.autoscaling
+
+3. disable an autoscaler
+k delete horizontalpodautoscalers.autoscaling <name>
+
+---
+
+APACHE BENCHMARK
+
+ab -n 50000 -c 500 http://<ip>/
+
+---
+
