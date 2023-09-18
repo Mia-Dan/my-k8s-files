@@ -8,15 +8,8 @@ kubectl patch deployment metrics-server -n kube-system --type 'json' -p '[{"op":
 
 # apache bench
 apt install apache2-utils
-
-
-
-echo ""
-echo ""
-echo ""
-
-
-# TEST
+# 中间会有个回复Y/n的地方，试试如何避免abort（先开始的commit是可以的，后来会abort）
+# 在执行本脚本时，`./set-autoscaler.sh`直接在terminal中回车，不要在它后面同时（一次性）复制其他cmd
 
 # apache bench
 ab -V

@@ -18,3 +18,10 @@ kubectl get po -n my-test-space -o wide
 echo ""
 kubectl get po -n my-test-space
 echo ""
+
+# SUPPOSE deployment-test.yaml contains deployment `php-apache`
+kubectl autoscale deployment php-apache --min=1 --max=8 --cpu-percent=10 
+echo ""
+kubectl get po -n my-test-space
+echo ""
+kubectl get hpa php-apache --watch
