@@ -30,16 +30,15 @@ echo ""
 # apache bench
 ab -V
 
-
 # 部署my-scheduler，部署测试用rc
 cat usages.txt
-
-echo "-------------1"
-kubectl get apiservices |grep metrics
 
 echo "---"
 echo "run TESTs for metrics-server:"
 echo "kubectl get apiservices |grep metrics"
 
-echo "-------------2"
+echo "-------------1"
 ./test-metrics-server.sh
+
+echo "-------------2"
+kubectl get apiservices |grep metrics
