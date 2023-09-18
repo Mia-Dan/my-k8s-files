@@ -9,12 +9,12 @@ echo ""
 echo "RUNNING TEST POD"
 echo ""
 kubectl create -f pod-test.yaml -n my-test-space
-kubectl get po
-
-
-echo ""
 echo ""
 echo "RUNNING TEST DEPLOYMENT"
 echo ""
 kubectl create -f deployment-test.yaml -n my-test-space
-kubectl get po
+echo ""
+kubectl get po -n my-test-space -o wide
+echo ""
+kubectl get po -n my-test-space
+echo ""
