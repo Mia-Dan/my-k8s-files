@@ -11,3 +11,4 @@ kubectl edit clusterrole system:kube-scheduler
 echo ""
 echo ""
 
+

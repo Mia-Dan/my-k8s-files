@@ -84,7 +84,7 @@ spec:
       - command:
         - /usr/local/bin/kube-scheduler
         - --config=/etc/kubernetes/my-scheduler/my-scheduler-config.yaml
-        image: miadan/my-kube-scheduler # I think it would get the latest submit? - which is enough, for now
+        image: miadan/my-kube-scheduler:2.1.1.28
         livenessProbe:
           httpGet:
             path: /healthz
