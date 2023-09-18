@@ -18,28 +18,14 @@ echo ""
 
 # TEST
 
-# metrics-server
-#   sleep 30
-#   kubectl top node
-#   kubectl get apiservices |grep metrics
-# which doesn't work, and will return: 
-#   error: Metrics API not available
-#   v1beta1.metrics.k8s.io                 kube-system/metrics-server   False (MissingEndpoints)   28s
-# no matter how long it `sleep`s
-
 # apache bench
 ab -V
+
+# metrics-server
+sleep 60 # wait for some time, before patch comes into effect 
+kubectl get apiservices |grep metrics
+
 
 # 部署my-scheduler，部署测试用rc
 cat usages.txt
 
-echo "---"
-echo "run TESTs for metrics-server:"
-echo "kubectl get apiservices |grep metrics"
-
-echo "-------------1"
-# ./test-metrics-server.sh
-
-# echo "-------------2"
-sleep 60
-kubectl get apiservices |grep metrics
