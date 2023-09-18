@@ -16,7 +16,7 @@ echo ""
 echo ""
 
 
-
+sleep 10
 # TEST
 
 # metrics-server
@@ -24,7 +24,7 @@ kubectl top node
 kubectl get apiservices |grep metrics
 
 # apache bench
-ab -v
+ab -V
 
 
 # 部署my-scheduler，部署测试用rc
