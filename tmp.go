@@ -533,7 +533,8 @@ func (sched *Scheduler) evaluateNominatedNode(ctx context.Context, pod *v1.Pod, 
 // getNodeUsage returns the CPU usage of a node.
 func getNodeUsage(ctx context.Context, nodeName string) (float64, error) {
 	// Set up the Kubernetes client
-	config, err := clientcmd.BuildConfigFromFlags("", "path/to/your/kubeconfig")
+	// config, err := clientcmd.BuildConfigFromFlags("", "path/to/your/kubeconfig") // https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/
+	config, err := clientcmd.BuildConfigFromFlags("", "/root/.kube/config")
 	if err != nil {
 		return 0, err
 	}
@@ -541,6 +542,8 @@ func getNodeUsage(ctx context.Context, nodeName string) (float64, error) {
 	if err != nil {
 		return 0, err
 	}
+	fmt.Println(clientset)
+	fmt.Println("Not sure if something would be printed somewhere I could find")
 	metricsClient, err := metricsv.NewForConfig(config)
 	if err != nil {
 		return 0, err
@@ -582,12 +585,13 @@ func (sched *Scheduler) findNodesThatPassFilters(
 	//	return feasibleNodes, nil
 	//}
 
-	// ------------------ my code v4.1.0.28
-	// intention: 过滤掉CPU使用率高于50%的节点
+	// ------------------ my code v4.1.3.28
+	// intention: 过滤掉CPU使用大于0.5的节点。
+	// expected: // 不清楚是不是CPU使用率大于50
 	// GPT：
 	for i := range feasibleNodes {
 		cpuUsage, _ := getNodeUsage(ctx, nodes[i].Node().Name)
-		if cpuUsage > 50 {
+		if cpuUsage > 0.5 {
 			continue
 		}
 		feasibleNodes[i] = nodes[i].Node()
