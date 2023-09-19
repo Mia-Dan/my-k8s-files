@@ -1,4 +1,5 @@
 #! /bin/bash
+cd ~/my-k8s-files
 
 kubectl create namespace my-test-space
 

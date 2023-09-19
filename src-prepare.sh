@@ -1,6 +1,9 @@
-# 环境准备
+#! /bin/bash
+cd ~
+
+# 目录准备
 mkdir go
-cd /root/go # 来自go env返回
+cd go # 来自go env返回
 mkdir -p src/k8s.io
 cd src/k8s.io
 
@@ -16,19 +19,11 @@ cd kubernetes/
 # cd cmd/kube-scheduler
 # vim scheduler.go #???
 
-# cd ../..
-
-
 # cd pkg/scheduler
 # vim schedule.go
 
-# cd ../..
-
-
 cd pkg/scheduler
 vim schedule_one.go
-
-cd ../..
 
 # 2.1.x.28 change location: around :540
 

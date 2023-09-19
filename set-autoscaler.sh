@@ -1,4 +1,5 @@
 #! /bin/bash
+cd ~/my-k8s-files
 
 # INSTALL
 
