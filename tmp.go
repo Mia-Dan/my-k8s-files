@@ -591,7 +591,7 @@ func (sched *Scheduler) findNodesThatPassFilters(
 	// GPT：
 	for i := range feasibleNodes {
 		cpuUsage, _ := getNodeUsage(ctx, nodes[i].Node().Name)
-		if cpuUsage > 0.5 {
+		if cpuUsage = 0 {
 			continue
 		}
 		feasibleNodes[i] = nodes[i].Node()
