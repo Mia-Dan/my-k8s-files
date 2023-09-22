@@ -9,6 +9,8 @@ sudo chmod 777 /mnt/nfs/promdata
 local_ip=$(ip a | sed -rn '/inet (.*) en/p' | cut --delimiter=' ' -f6 | cut --delimiter='/' -f1)
 sed -i "s/<nfs-ip>/$local_ip/" 2-pv/pv-pvc-4nfs.yaml
 
+kubectl apply -f 2-pv/pv-pvc-4nfs.yaml
+
 # 1. sudo apt install nfs-kernel-server
     # ...
     # Creating config file /etc/idmapd.conf with new version
