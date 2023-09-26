@@ -13,7 +13,8 @@ spec:
   template:
     metadata:
       labels:
-        app: prometheus
+        matchLabels:
+          app: prometheus
     spec:
       serviceAccountName: prometheus
       serviceAccount: prometheus
