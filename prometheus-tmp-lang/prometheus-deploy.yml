@@ -27,8 +27,7 @@ spec:
   template:
     metadata:
       labels:
-        matchLabels:
-          app: prometheus
+        app: prometheus
     spec:
       containers:
       - name: prometheus
