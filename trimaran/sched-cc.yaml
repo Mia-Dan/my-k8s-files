@@ -1,15 +1,15 @@
 apiVersion: kubescheduler.config.k8s.io/v1
 kind: KubeSchedulerConfiguration
 leaderElection:
+  # (Optional) Change true to false if you are not running a HA control-plane.
   leaderElect: false
 clientConnection:
   kubeconfig: /etc/kubernetes/scheduler.conf
 profiles:
-- schedulerName: trimaran
+- schedulerName: default-scheduler
   plugins:
-    score:
-      disabled:
-      - name: NodeResourcesBalancedAllocation
-      - name: NodeResourcesLeastAllocated
+    multiPoint:
       enabled:
-       - name: TargetLoadPacking
+      - name: Trimaran
+      # disabled:
+      # - name: PrioritySort
