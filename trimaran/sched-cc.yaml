@@ -13,10 +13,3 @@ profiles:
       - name: NodeResourcesLeastAllocated
       enabled:
        - name: TargetLoadPacking
-  pluginConfig:
-  - name: TargetLoadPacking
-    args:
-      defaultRequests:
-        cpu: "1000m"
-      defaultRequestsMultiplier: "2"
-      targetUtilization: 50
