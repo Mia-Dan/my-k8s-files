@@ -1,15 +1,26 @@
 apiVersion: kubescheduler.config.k8s.io/v1
 kind: KubeSchedulerConfiguration
 leaderElection:
-  # (Optional) Change true to false if you are not running a HA control-plane.
   leaderElect: false
 clientConnection:
   kubeconfig: /etc/kubernetes/scheduler.conf
 profiles:
-- schedulerName: default-scheduler
+- schedulerName: trimaran
   plugins:
-    multiPoint:
+    score:
+      disabled:
+      - name: NodeResourcesBalancedAllocation
+      - name: NodeResourcesLeastAllocated
       enabled:
-      - name: Trimaran
-      # disabled:
-      # - name: PrioritySort
+       - name: TargetLoadPacking
+  pluginConfig:
+  - name: TargetLoadPacking
+    args:
+      defaultRequests:
+        cpu: "2000m"
+      defaultRequestsMultiplier: "2"
+      targetUtilization: 70
+      metricProvider: 
+        type: Prometheus
+        # address: http://prometheus-k8s.monitoring.svc.cluster.local:9090
+        address: http://localhost:9090

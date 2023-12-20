@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-test
+spec:
+  schedulerName: trimaran
+  containers:
+  - name: kubia
+    image: miadan/kubia
