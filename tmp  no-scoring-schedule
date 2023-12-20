@@ -1,0 +1,10 @@
+no-scoring-schedule
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-scheduled-by-no-scoring
+spec:
+  schedulerName: no-scoring-scheduler
+  containers:
+  - image: miadan/kubia
