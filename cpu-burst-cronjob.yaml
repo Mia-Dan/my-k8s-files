@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cpu-burst-job
+  labels:
+    app: cpu-burst-demo
+spec:
+  schedule: "*/5 * * * *"  # Run every 5 minutes, adjust as needed
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cpu-burster
+            image: busybox:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Starting CPU burst at $(date)"
+              # Create a CPU-intensive workload using bc to calculate pi
+              # This will use a single core at 100%
+              # For multi-core usage, we'll run multiple instances in parallel
+              for i in $(seq 1 $(nproc)); do
+                echo "Starting worker $i"
+                (while true; do
+                  for j in $(seq 1 10000000); do
+                    echo "scale=10000; 4*a(1)" | bc -l > /dev/null
+                  done
+                done) &
+              done
+              
+              # Run for specified duration then cleanup
+              echo "CPU burst running for $DURATION_SECONDS seconds..."
+              sleep ${DURATION_SECONDS:-30}
+              
+              # Kill all background processes
+              echo "Stopping CPU burst"
+              pkill -P $$
+              echo "CPU burst completed at $(date)"
+            env:
+            - name: DURATION_SECONDS
+              value: "30"  # Duration of CPU burst in seconds
+            resources:
+              requests:
+                cpu: "100m"  # Initial request is modest
+                memory: "64Mi"
+              limits:
+                cpu: "2"     # But allow it to use up to 2 cores
+                memory: "128Mi"
+          restartPolicy: Never
