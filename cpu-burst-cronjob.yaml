@@ -1,7 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cpu-burst
+  labels:
+    name: cpu-burst
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: cpu-burst-job
+  namespace: cpu-burst
   labels:
     app: cpu-burst-demo
 spec:
