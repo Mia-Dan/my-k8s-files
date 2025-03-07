@@ -13,7 +13,7 @@ metadata:
   labels:
     app: cpu-burst-demo
 spec:
-  schedule: "*/5 * * * *"  # Run every 5 minutes, adjust as needed
+  schedule: "*/1 * * * *"  # Run every 1 minutes, adjust as needed
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
